@@ -139,9 +139,9 @@ def parse_args():
         ),
     )
     parser.add_argument("--num_epochs", type=int, default=100)
-    parser.add_argument("--save_images_epochs", type=int, default=100, help="How often to save images during training.")
+    parser.add_argument("--save_images_epochs", type=int, default=50, help="How often to save images during training.")
     parser.add_argument(
-        "--save_model_epochs", type=int, default=100, help="How often to save the model during training."
+        "--save_model_epochs", type=int, default=50, help="How often to save the model during training."
     )
     parser.add_argument(
         "--gradient_accumulation_steps",
@@ -236,7 +236,7 @@ def parse_args():
     parser.add_argument(
         "--checkpointing_steps",
         type=int,
-        default=500,
+        default=50,
         help=(
             "Save a checkpoint of the training state every X updates. These checkpoints are only suitable for resuming"
             " training using `--resume_from_checkpoint`."
