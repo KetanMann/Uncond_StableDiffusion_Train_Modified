@@ -6,7 +6,7 @@ import os
 import shutil
 from datetime import timedelta
 from pathlib import Path
-
+from PIL import Image
 import accelerate
 import datasets
 import torch
@@ -627,7 +627,11 @@ def main(args):
         progress_bar.close()
 
         accelerator.wait_for_everyone()
-
+        def save_images_locally(images, save_dir, epoch):
+            os.makedirs(save_dir, exist_ok=True)
+            for i, img in enumerate(images):
+                img = Image.fromarray(img)
+                img.save(os.path.join(save_dir, f"epoch_{epoch}_image_{i}.png"))
         # Generate sample images for visual inspection
         if accelerator.is_main_process:
             if epoch % args.save_images_epochs == 0 or epoch == args.num_epochs - 1:
@@ -656,7 +660,7 @@ def main(args):
 
                 # denormalize the images and save to tensorboard
                 images_processed = (images * 255).round().astype("uint8")
-
+                save_images_locally(images_processed, "saved_images", epoch)
                 if args.logger == "tensorboard":
                     if is_accelerate_version(">=", "0.17.0.dev0"):
                         tracker = accelerator.get_tracker("tensorboard", unwrap=True)
