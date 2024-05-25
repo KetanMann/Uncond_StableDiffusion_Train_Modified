@@ -141,7 +141,7 @@ def parse_args():
     parser.add_argument("--num_epochs", type=int, default=100)
     parser.add_argument("--save_images_epochs", type=int, default=50, help="How often to save images during training.")
     parser.add_argument(
-        "--save_model_epochs", type=int, default=50, help="How often to save the model during training."
+        "--save_model_epochs", type=int, default=150, help="How often to save the model during training."
     )
     parser.add_argument(
         "--gradient_accumulation_steps",
