@@ -19,7 +19,7 @@ from huggingface_hub import create_repo, upload_folder
 from packaging import version
 from torchvision import transforms
 from tqdm.auto import tqdm
-
+import matplotlib.pyplot as plt
 import diffusers
 from diffusers import DDPMPipeline, DDPMScheduler, UNet2DModel
 from diffusers.optimization import get_scheduler
@@ -632,6 +632,10 @@ def main(args):
             for i, img in enumerate(images):
                 img = Image.fromarray(img)
                 img.save(os.path.join(save_dir, f"epoch_{epoch}_image_{i}.png"))
+                plt.imshow(img_pil)
+                plt.title(f"Epoch {epoch} Image {i}")
+                plt.axis('off')
+                plt.show()
         # Generate sample images for visual inspection
         if accelerator.is_main_process:
             if epoch % args.save_images_epochs == 0 or epoch == args.num_epochs - 1:
