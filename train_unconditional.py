@@ -630,8 +630,8 @@ def main(args):
         def save_images_locally(images, save_dir, epoch):
             os.makedirs(save_dir, exist_ok=True)
             for i, img in enumerate(images):
-                img = Image.fromarray(img)
-                img.save(os.path.join(save_dir, f"epoch_{epoch}_image_{i}.png"))
+                img_pil = Image.fromarray(img)
+                img_pil.save(os.path.join(save_dir, f"epoch_{epoch}_image_{i}.png"))
                 plt.imshow(img_pil)
                 plt.title(f"Epoch {epoch} Image {i}")
                 plt.axis('off')
