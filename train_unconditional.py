@@ -625,7 +625,7 @@ def main(args):
             progress_bar.set_postfix(**logs)
             accelerator.log(logs, step=global_step)
         progress_bar.close()
-
+        %matplotlib inline
         accelerator.wait_for_everyone()
         def save_images_locally(images, save_dir, epoch):
             os.makedirs(save_dir, exist_ok=True)
